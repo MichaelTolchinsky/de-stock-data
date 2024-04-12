@@ -25,8 +25,10 @@ def fetch_stock_data():
   else:
     print("Failed to fetch data", response.status_code)
 
-
-if __name__ == "__main__":
+def fetch_and_save_raw_stock_data():
   db.create_or_update_tables()
   raw_data = fetch_stock_data()
   db.save_raw_data(SYMBOL, raw_data)
+
+if __name__ == "__main__":
+  fetch_and_save_raw_stock_data()
