@@ -1,12 +1,13 @@
-from db import database as db
-from dotenv import load_dotenv
 import requests
 import os
+import sys
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from db import database as db
 
-load_dotenv()
-API_KEY = os.environ.get("ALPHA_VANTAGE_API_KEY")
-BASE_URL = os.environ.get("ALPHA_VANTAGE_BASE_URL")
-FUNCTION = os.environ.get("ALPHA_VANTAGE_FUNCTION")
+API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
+BASE_URL = os.getenv("ALPHA_VANTAGE_BASE_URL")
+FUNCTION = os.getenv("ALPHA_VANTAGE_FUNCTION")
 SYMBOL = "NVDA"  # stock of your choise
 
 

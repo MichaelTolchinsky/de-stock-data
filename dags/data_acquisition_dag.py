@@ -2,6 +2,10 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from dags_common import default_args
+import os
+import sys
+# Add the parent directory of the scripts package to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from scripts import data_acquisition as da
 
 # Data Acquisition DAG
