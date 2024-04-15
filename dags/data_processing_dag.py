@@ -2,11 +2,11 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from dags_common import default_args
-import sys
 import os
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(parent_dir)
-from scripts.data_processing import process_and_save_data
+import sys
+# Add the parent directory of the scripts package to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from scripts import data_processing as ds
 
 # Data Processing DAG
 processing_dag = DAG(
@@ -14,12 +14,12 @@ processing_dag = DAG(
   default_args=default_args,
   start_date=datetime(2024,4,12),
   description='DAG for weekly data processing',
-  schedule='0 12 * * 0',  # Run week day at 12 AM
+  schedule_interval='0 12 * * 0',  # Run week day at 12 AM
 )
 
 aquisition_task = PythonOperator(
   task_id='fetch_and_save_processed_stock_data',
-  python_callable=process_and_save_data,
+  python_callable=ds.process_and_save_data,
   dag=processing_dag,
 )
 
