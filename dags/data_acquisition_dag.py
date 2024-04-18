@@ -15,9 +15,10 @@ acquisition_dag = DAG(
     start_date=datetime(2024, 4, 12),
     description='DAG for daily raw stock data acquisition',
     schedule_interval='0 11 * * *',  # Run every day at 11 AM
+    #schedule_interval=None
 )
 
-aquisition_task = PythonOperator(
+aquisitiaon_task = PythonOperator(
     task_id='fetch_and_save_raw_stock_data',
     python_callable=da.fetch_and_save_raw_stock_data,
     dag=acquisition_dag,

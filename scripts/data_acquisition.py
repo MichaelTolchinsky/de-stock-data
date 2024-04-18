@@ -7,7 +7,7 @@ from db import database as db
 
 API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
 BASE_URL = os.getenv("ALPHA_VANTAGE_BASE_URL")
-FUNCTION = os.getenv("ALPHA_VANTAGE_FUNCTION")
+FUNCTION = 'Time_Series_Daily'
 SYMBOL = "NVDA"  # stock of your choise
 
 
@@ -30,5 +30,6 @@ def fetch_and_save_raw_stock_data():
     raw_data = fetch_stock_data()
     db.save_raw_data(SYMBOL, raw_data)
 
-# if __name__ == "__main__": only use for manual testing
-#   fetch_and_save_raw_stock_data()
+
+# if __name__ == "__main__":  # only use for manual testing
+#     fetch_and_save_raw_stock_data()

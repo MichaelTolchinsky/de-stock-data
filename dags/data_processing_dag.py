@@ -15,11 +15,11 @@ processing_dag = DAG(
   start_date=datetime(2024,4,12),
   description='DAG for weekly data processing',
   schedule_interval='0 12 * * 0',  # Run week day at 12 AM
+  #schedule_interval=None
 )
 
-aquisition_task = PythonOperator(
-  task_id='fetch_and_save_processed_stock_data',
+processing_task = PythonOperator(
+  task_id='process_and_save_data',
   python_callable=ds.process_and_save_data,
   dag=processing_dag,
 )
-
