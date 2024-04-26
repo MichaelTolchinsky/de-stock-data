@@ -1,5 +1,11 @@
 import os
+import sys
+from typing import List
 from psycopg2 import pool
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from models.processed_stock_data import ProcessedStockData
+from models.raw_stock_data import RawStockData
 
 # Initialize the connection pool
 connection_pool = pool.SimpleConnectionPool(
@@ -13,19 +19,15 @@ connection_pool = pool.SimpleConnectionPool(
 )
 
 # Get a connection from the connection pool.
-
-
-def get_connection():
+def get_connection() -> None:
     return connection_pool.getconn()
 
 # Release the connection back to the connection pool.
-
-
-def release_connection(conn):
+def release_connection(conn) -> None:
     connection_pool.putconn(conn)
 
 
-def create_or_update_tables():
+def create_or_update_tables() -> None:
   # Connect to the database
     conn = get_connection()
     cursor = conn.cursor()
@@ -55,7 +57,7 @@ def create_or_update_tables():
     release_connection(conn)
 
 
-def save_raw_data(stock_symbol, raw_data):
+def save_raw_data(stock_symbol: str, raw_data: List[RawStockData]) -> None:
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -70,7 +72,7 @@ def save_raw_data(stock_symbol, raw_data):
     release_connection(conn)
 
 
-def fetch_raw_data():
+def fetch_raw_data() -> RawStockData:
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -86,7 +88,7 @@ def fetch_raw_data():
     return raw_data
 
 
-def save_processed_data(processed_data):
+def save_processed_data(processed_data: List[ProcessedStockData]) -> None:
     conn = get_connection()
     cursor = conn.cursor()
 
