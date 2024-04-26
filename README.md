@@ -5,7 +5,7 @@ This repository contains a Python-based stock data pipeline that retrieves, proc
 ## Features:
 
 - **Data Acquisition:** Fetches the latest stock market data from an external API (e.g., Alpha Vantage) using Python scripts.
-- **Data Storage:** Stores the acquired stock data in a SQLite database for efficient data retrieval and management. (will move to postgres/mongo container)
+- **Data Storage:** Stores the acquired stock data in a PostgreSQL database for efficient data retrieval and management.
 - **Data Processing:** Processes the raw stock data to perform various transformations, calculations, and analytics.
 - **Automated Workflow:** Utilizes Apache Airflow for task scheduling and orchestration.
 
@@ -13,5 +13,5 @@ This repository contains a Python-based stock data pipeline that retrieves, proc
 
 - Python 3.x
 - Requests library for HTTP requests
-- SQLite database for data storage (will move to postgres/mongo container)
+- PostgreSQL database for data storage
 - Apache Airflow for task scheduling and orchestration
